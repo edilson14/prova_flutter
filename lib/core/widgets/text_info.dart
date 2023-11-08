@@ -1,16 +1,15 @@
 import 'package:capture_text/core/models/models.dart';
 import 'package:capture_text/core/styles/styles.dart';
+import 'package:capture_text/modules/infos/store/info_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 class TextInfoWidget extends StatelessWidget {
-  final List<InfoModel> infos;
-  final void Function() delete;
+  final InfoStore store;
 
   const TextInfoWidget({
     super.key,
-    required this.infos,
-    required this.delete,
+    required this.store,
   });
 
   @override
@@ -20,22 +19,33 @@ class TextInfoWidget extends StatelessWidget {
       child: Observer(
         builder: (_) => ListView.separated(
           shrinkWrap: true,
-          itemCount: infos.length,
+          itemCount: store.infos.length,
           itemBuilder: (_, index) {
-            String text = infos[index].text;
+            InfoModel infoModel = store.infos[index];
             return ListTile(
-              title: Text(text),
+              title: Text(infoModel.text),
               trailing: Wrap(
                 children: [
-                  const IconButton(
-                    onPressed: null,
-                    icon: Icon(
+                  IconButton(
+                    onPressed: () {
+                      store.currentInfo = infoModel;
+                      store.formController.value = TextEditingValue(
+                        text: infoModel.text,
+                        selection: TextSelection.collapsed(
+                          offset: infoModel.text.length,
+                        ),
+                      );
+                      store.currentText = infoModel.text;
+                    },
+                    icon: const Icon(
                       Icons.edit,
                       color: AppColors.black,
                     ),
                   ),
                   IconButton(
-                    onPressed: () => delete(),
+                    onPressed: () {
+                      store.currentInfo = infoModel;
+                    },
                     icon: const Icon(
                       Icons.close,
                       color: AppColors.red,

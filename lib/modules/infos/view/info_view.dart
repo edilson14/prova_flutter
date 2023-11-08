@@ -46,8 +46,7 @@ class _InfoPageState extends State<InfoPage> {
                       ),
                     ),
                     TextInfoWidget(
-                      infos: _infoStore.infos,
-                      delete: _infoStore.deleteText,
+                      store: _infoStore,
                     ),
                   ],
                 ),
@@ -70,5 +69,6 @@ class _InfoPageState extends State<InfoPage> {
   void dispose() {
     super.dispose();
     _infoStore.saveWords();
+    _infoStore.formController.dispose();
   }
 }

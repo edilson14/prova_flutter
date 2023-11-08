@@ -2,7 +2,7 @@
 import 'dart:convert';
 
 class InfoModel {
-  final String text;
+  String text;
   int? createdAt;
 
   InfoModel({

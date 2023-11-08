@@ -17,6 +17,22 @@ mixin _$InfoStore on _InfoStore, Store {
               name: '_InfoStore.infos'))
           .value;
 
+  late final _$formControllerAtom =
+      Atom(name: '_InfoStore.formController', context: context);
+
+  @override
+  TextEditingController get formController {
+    _$formControllerAtom.reportRead();
+    return super.formController;
+  }
+
+  @override
+  set formController(TextEditingController value) {
+    _$formControllerAtom.reportWrite(value, super.formController, () {
+      super.formController = value;
+    });
+  }
+
   late final _$isLoadingWordsAtom =
       Atom(name: '_InfoStore.isLoadingWords', context: context);
 
@@ -111,6 +127,7 @@ mixin _$InfoStore on _InfoStore, Store {
   @override
   String toString() {
     return '''
+formController: ${formController},
 isLoadingWords: ${isLoadingWords},
 currentText: ${currentText},
 infos: ${infos}

@@ -10,7 +10,12 @@ class InfoStore = _InfoStore with _$InfoStore;
 
 abstract class _InfoStore with Store {
   @observable
+  TextEditingController formController = TextEditingController();
+
+  @observable
   bool isLoadingWords = true;
+
+  final textFormkey = GlobalKey<FormState>();
 
   @observable
   // ignore: prefer_final_fields
@@ -36,8 +41,6 @@ abstract class _InfoStore with Store {
     return null;
   }
 
-  final textFormkey = GlobalKey<FormState>();
-
   loadTexts() async {
     List<String>? savedWords = await LocalStorageServices.getInfos();
 
@@ -55,17 +58,28 @@ abstract class _InfoStore with Store {
       if (currentInfo == null) {
         currentInfo = InfoModel(text: currentText!);
         infos.add(currentInfo!);
-        currentText = null;
-        currentInfo = null;
+        _resetValues();
+      } else {
+        int infoIndex = _infos.indexWhere(
+            (element) => element.createdAt! == currentInfo!.createdAt!);
+        currentInfo =
+            InfoModel(text: currentText!, createdAt: currentInfo!.createdAt);
+        infos[infoIndex] = currentInfo!;
+
+        _resetValues();
       }
-      if (infos.isNotEmpty) {
-        LocalStorageServices.saveInfos(infos);
-      }
+      LocalStorageServices.saveInfos(infos);
     }
   }
 
   void saveWords() {
     LocalStorageServices.saveInfos(infos);
+  }
+
+  void _resetValues() {
+    currentInfo = null;
+    currentText = null;
+    formController = TextEditingController();
   }
 
   @action
