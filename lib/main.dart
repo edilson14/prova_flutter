@@ -1,7 +1,7 @@
+import 'package:capture_text/modules/modules.dart';
 import 'package:flutter/material.dart';
 
 import 'package:capture_text/core/styles/styles.dart';
-import 'package:capture_text/modules/login/view/login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: appTheme,
-      home: LoginPage(),
+      home: InfoPage(),
     );
   }
 }

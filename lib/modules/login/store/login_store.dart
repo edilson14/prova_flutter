@@ -78,6 +78,6 @@ abstract class _LoginStore with Store {
       noSpecialCaracter.hasMatch(text);
 
   Future<void> openUrl() async {
-    if (!await launchUrl(url)) {}
+    if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {}
   }
 }

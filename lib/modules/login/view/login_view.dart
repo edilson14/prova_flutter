@@ -1,5 +1,3 @@
-import 'package:capture_text/core/styles/styles.dart';
-import 'package:capture_text/core/widgets/login_form.dart';
 import 'package:capture_text/core/widgets/widgets.dart';
 import 'package:capture_text/modules/login/store/login_store.dart';
 import 'package:flutter/material.dart';
@@ -19,15 +17,7 @@ class LoginPage extends StatelessWidget {
             Expanded(
               child: LoginForm(store: _loginStore),
             ),
-            TextButton(
-              onPressed: _loginStore.openUrl,
-              child: const Text(
-                'Política de Privacidade',
-                style: TextStyle(
-                  color: AppColors.white,
-                ),
-              ),
-            ),
+            UrlLink(callbackAction: _loginStore.openUrl),
             const SizedBox(
               height: 10,
             )
