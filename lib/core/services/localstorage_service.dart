@@ -1,7 +1,7 @@
 import 'package:capture_text/core/models/text_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-const String itemNameKey = '';
+const String itemNameKey = 'localSavedTexts';
 
 class LocalStorageServices {
   LocalStorageServices._();
@@ -14,5 +14,11 @@ class LocalStorageServices {
     }
 
     await preferences.setStringList(itemNameKey, infosString);
+  }
+
+  static Future<List<String>?> getInfos() async {
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+
+    return preferences.getStringList(itemNameKey);
   }
 }

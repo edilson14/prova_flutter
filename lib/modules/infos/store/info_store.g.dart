@@ -98,6 +98,17 @@ mixin _$InfoStore on _InfoStore, Store {
   }
 
   @override
+  void deleteText() {
+    final _$actionInfo =
+        _$_InfoStoreActionController.startAction(name: '_InfoStore.deleteText');
+    try {
+      return super.deleteText();
+    } finally {
+      _$_InfoStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 isLoadingWords: ${isLoadingWords},

@@ -5,10 +5,12 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 
 class TextInfoWidget extends StatelessWidget {
   final List<InfoModel> infos;
+  final void Function() delete;
 
   const TextInfoWidget({
     super.key,
     required this.infos,
+    required this.delete,
   });
 
   @override
@@ -23,9 +25,9 @@ class TextInfoWidget extends StatelessWidget {
             String text = infos[index].text;
             return ListTile(
               title: Text(text),
-              trailing: const Wrap(
+              trailing: Wrap(
                 children: [
-                  IconButton(
+                  const IconButton(
                     onPressed: null,
                     icon: Icon(
                       Icons.edit,
@@ -33,8 +35,8 @@ class TextInfoWidget extends StatelessWidget {
                     ),
                   ),
                   IconButton(
-                    onPressed: null,
-                    icon: Icon(
+                    onPressed: () => delete(),
+                    icon: const Icon(
                       Icons.close,
                       color: AppColors.red,
                     ),

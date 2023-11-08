@@ -38,8 +38,14 @@ abstract class _InfoStore with Store {
 
   final textFormkey = GlobalKey<FormState>();
 
-  loadTexts() {
-    Future.delayed(const Duration(seconds: 2));
+  loadTexts() async {
+    List<String>? savedWords = await LocalStorageServices.getInfos();
+
+    if (savedWords != null) {
+      for (var word in savedWords) {
+        infos.add(InfoModel.fromJson(word));
+      }
+    }
     isLoadingWords = false;
   }
 
@@ -50,8 +56,18 @@ abstract class _InfoStore with Store {
         currentInfo = InfoModel(text: currentText!);
         infos.add(currentInfo!);
         currentText = null;
+        currentInfo = null;
       }
-      // LocalStorageServices.saveInfos(infos);
+      if (infos.isNotEmpty) {
+        LocalStorageServices.saveInfos(infos);
+      }
     }
   }
+
+  void saveWords() {
+    LocalStorageServices.saveInfos(infos);
+  }
+
+  @action
+  void deleteText() {}
 }

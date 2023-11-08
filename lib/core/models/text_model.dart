@@ -9,7 +9,7 @@ class InfoModel {
     required this.text,
     this.createdAt,
   }) {
-    createdAt ?? DateTime.now().microsecondsSinceEpoch;
+    createdAt = createdAt ?? DateTime.now().microsecondsSinceEpoch;
   }
 
   Map<String, dynamic> toMap() {
