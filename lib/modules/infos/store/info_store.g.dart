@@ -114,11 +114,11 @@ mixin _$InfoStore on _InfoStore, Store {
   }
 
   @override
-  void deleteText() {
+  void deleteText(BuildContext context) {
     final _$actionInfo =
         _$_InfoStoreActionController.startAction(name: '_InfoStore.deleteText');
     try {
-      return super.deleteText();
+      return super.deleteText(context);
     } finally {
       _$_InfoStoreActionController.endAction(_$actionInfo);
     }

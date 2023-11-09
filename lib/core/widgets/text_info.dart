@@ -1,5 +1,6 @@
 import 'package:capture_text/core/models/models.dart';
 import 'package:capture_text/core/styles/styles.dart';
+import 'package:capture_text/core/widgets/widgets.dart';
 import 'package:capture_text/modules/infos/store/info_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -45,6 +46,15 @@ class TextInfoWidget extends StatelessWidget {
                   IconButton(
                     onPressed: () {
                       store.currentInfo = infoModel;
+                      showAdaptiveDialog(
+                        barrierDismissible: false,
+                        context: context,
+                        builder: (_) {
+                          return ConfirmModal(
+                            delete: () => store.deleteText(context),
+                          );
+                        },
+                      );
                     },
                     icon: const Icon(
                       Icons.close,

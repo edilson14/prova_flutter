@@ -9,6 +9,7 @@ final RegExp noSpecialCaracter = RegExp(r'^[a-zA-Z0-9]+$');
 const String googleUrl = 'https://www.google.com.br/';
 final Uri url = Uri.parse(googleUrl);
 
+// ignore: library_private_types_in_public_api
 class LoginStore = _LoginStore with _$LoginStore;
 
 abstract class _LoginStore with Store {

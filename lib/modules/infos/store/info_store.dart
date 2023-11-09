@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:capture_text/core/messages/messages.dart';
 import 'package:capture_text/core/models/models.dart';
 import 'package:capture_text/core/services/services.dart';
@@ -68,7 +70,7 @@ abstract class _InfoStore with Store {
 
         _resetValues();
       }
-      LocalStorageServices.saveInfos(infos);
+      saveWords();
     }
   }
 
@@ -83,5 +85,10 @@ abstract class _InfoStore with Store {
   }
 
   @action
-  void deleteText() {}
+  void deleteText(BuildContext context) {
+    _infos.removeWhere(
+        (element) => element.createdAt! == currentInfo!.createdAt!);
+    saveWords();
+    Navigator.pop(context);
+  }
 }
