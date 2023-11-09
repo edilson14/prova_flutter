@@ -5,10 +5,12 @@ import 'package:url_launcher/url_launcher.dart';
 
 part 'login_store.g.dart';
 
-class LoginStore = _LoginStore with _$LoginStore;
 final RegExp noSpecialCaracter = RegExp(r'^[a-zA-Z0-9]+$');
 const String googleUrl = 'https://www.google.com.br/';
 final Uri url = Uri.parse(googleUrl);
+
+// ignore: library_private_types_in_public_api
+class LoginStore = _LoginStore with _$LoginStore;
 
 abstract class _LoginStore with Store {
   final formKey = GlobalKey<FormState>();
@@ -78,6 +80,6 @@ abstract class _LoginStore with Store {
       noSpecialCaracter.hasMatch(text);
 
   Future<void> openUrl() async {
-    if (!await launchUrl(url)) {}
+    if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {}
   }
 }

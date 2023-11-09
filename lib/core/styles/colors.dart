@@ -7,6 +7,8 @@ class AppColors {
   static const Color lightGreen = Color(0xff2c8f8a);
   static const Color green = Colors.green;
   static const Color white = Colors.white;
+  static const Color black = Colors.black;
+  static const Color red = Colors.red;
 
   static List<Color> gradientColors = [
     darkGreen,
