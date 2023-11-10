@@ -59,7 +59,7 @@ class LoginForm extends StatelessWidget {
               width: 150,
               child: TextButton(
                 style: loginButtonStyles,
-                onPressed: store.doLogin,
+                onPressed: () => store.doLogin(context),
                 child: const Text('Entrar'),
               ),
             ),

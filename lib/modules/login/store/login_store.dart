@@ -1,4 +1,5 @@
 import 'package:capture_text/core/messages/messages.dart';
+import 'package:capture_text/modules/infos/view/info.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -43,9 +44,6 @@ abstract class _LoginStore with Store {
     if (_hasSpaceAtEnd(value)) {
       return AppMessages.spaceAtEnd;
     }
-    if (_hasSpaceAtEnd(value)) {
-      return AppMessages.spaceAtEnd;
-    }
 
     return null;
   }
@@ -69,9 +67,16 @@ abstract class _LoginStore with Store {
   }
 
   @action
-  Future<void> doLogin() async {
+  Future<void> doLogin(BuildContext context) async {
     Future.delayed(const Duration(seconds: 2));
-    if (formKey.currentState!.validate()) {}
+    if (formKey.currentState!.validate()) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const InfoPage(),
+        ),
+      );
+    }
   }
 
   bool _hasSpaceAtEnd(String text) => text.trim() != text;
