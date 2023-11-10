@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:capture_text/core/styles/styles.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: appTheme,
-      home: const InfoPage(),
+      home: LoginPage(),
     );
   }
 }
